@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "This is the website that will contain my UI design portfolio and other general information about myself",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sam Clemente",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
