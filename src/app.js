@@ -7,9 +7,9 @@ const PORT = 3000;
 
 app.use(express.static(publicPath, {extensions: ['html']}));
 
-app.use(function (req, res) {
-    res.status(404).sendFile(publicPath + '/404.html');
-});
+//app.use(function (req, res) {
+//    res.status(404).sendFile(publicPath + '/404.html');
+//});
 
 app.listen(PORT, (error) => {
     if (!error)
