@@ -24,7 +24,6 @@ app.use('/styles', express.static(stylesPath));
 app.get('/:directory/:page', (req, res) => {
     const { directory, page } = req.params;
     const filePath = path.join(viewsPath, directory, `${page}.html`);
-    console.log(filePath);
     res.sendFile(filePath, (err) => {
         if(err) {
             const notFoundPath = path.join(viewsPath, '404.html');
