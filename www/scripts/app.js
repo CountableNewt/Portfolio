@@ -1,8 +1,6 @@
 // Build the express server
 const express = require('express');
-const { fstat } = require('fs');
 const path = require('path');
-const fs = require('fs'); // for file system operations
 const app = express();
 
 // Define directory paths
