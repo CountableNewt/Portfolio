@@ -11,7 +11,7 @@ const librariesPath = path.join(__dirname, '../libraries');
 const scriptsPath = path.join(__dirname, '../scripts');
 const stylesPath = path.join(__dirname, '../styles');
 const viewsPath = path.join(__dirname, '../views');
-const PORT = 3000;
+const PORT = 80;
 
 // Routes for directories
 app.use('/assets', express.static(assetsPath));
