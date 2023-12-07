@@ -3,13 +3,7 @@
     --Background: #fff1cd;
 }
 
-@media (prefers-color-scheme: dark){
-    :root{
-        --Text: rgba(253, 255, 246, 0.95);
-        --Background: #1f1f1f;
-    }
-}
-
+/* Classes */
 .landing-page-main{
     padding: 1.5rem 10rem;
     display: flex;
@@ -62,6 +56,32 @@
     gap: 1rem;
 }
 
+/* Media Queries */
+@media (prefers-color-scheme: dark){
+    :root{
+        --Text: rgba(253, 255, 246, 0.95);
+        --Background: #1f1f1f;
+    }
+}
+
+@media (max-width: 1000px){
+    .landing-page-main{
+        padding: 1.5rem 6rem;
+    }
+}
+
+@media (max-width: 750px){
+    .landing-page-main{
+        padding: 1.5rem 3rem;
+        gap: 10rem;
+    }
+
+    .hero{
+        padding: 0rem 3rem;
+    }
+}
+
+/* Element Properties */
 body{
     background-color: var(--Background);
 }
@@ -80,6 +100,7 @@ h1, h2, h3, p{
     align-self: stretch;
     flex-wrap: wrap;
 }
+
 h1{
     font-size: 4rem;
 }
