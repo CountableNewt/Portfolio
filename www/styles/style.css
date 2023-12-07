@@ -68,9 +68,13 @@
     .landing-page-main{
         padding: 1.5rem 6rem;
     }
+
+    .about-main{
+        padding: 1.5rem 6rem 1.5rem 4.5rem;
+    }
 }
 
-@media (max-width: 750px){
+@media (max-width: 775px){
     .landing-page-main{
         padding: 1.5rem 3rem;
         gap: 10rem;
@@ -79,6 +83,15 @@
     .hero{
         padding: 0rem 3rem;
     }
+
+    .about-main{
+        padding: 1.5rem 3rem 1.5rem 4.5rem;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 650px){
+    /* Switch to Mobile Nav*/
 }
 
 /* Element Properties */
@@ -147,6 +160,6 @@ a:visited{
     color: var(--Text);
 }
 
-a:hover{
+li a:hover{
     text-decoration: underline;
 }
