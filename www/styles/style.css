@@ -1,6 +1,6 @@
 :root{
-    --Text: rgba(41,41,41,0.95);
-    --Background: #fff1cd;
+    --Text-Color: rgba(41,41,41,0.95);
+    --Background-Color: #fff1cd;
 }
 
 /* Classes */
@@ -25,6 +25,7 @@
     align-items: flex-start;
     gap: 1.5625rem;
     align-self: stretch;
+    max-width: 125ch;
 }
 
 .title{
@@ -32,22 +33,6 @@
     align-items: flex-start;
     gap: 0.625rem;
     flex: 1 0 0;
-}
-
-.nav-text{
-    color: var(--Text);
-    font-family: Alice;
-    text-align: center;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.main-section{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
 }
 
 .sub-section{
@@ -59,8 +44,8 @@
 /* Media Queries */
 @media (prefers-color-scheme: dark){
     :root{
-        --Text: rgba(253, 255, 246, 0.95);
-        --Background: #1f1f1f;
+        --Text-Color: rgba(253, 255, 246, 0.95);
+        --Background-Color: #1f1f1f;
     }
 }
 
@@ -96,11 +81,17 @@
 
 /* Element Properties */
 body{
-    background-color: var(--Background);
+    background-color: var(--Background-Color);
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 h1, h2, h3, p{
-    color: var(--Text);
+    color: var(--Text-Color);
     font-family: Alice;
     font-style: normal;
     font-weight: 400;
@@ -113,6 +104,7 @@ h1, h2, h3, p{
     align-self: stretch;
     flex-wrap: wrap;
 }
+
 
 h1{
     font-size: 4rem;
@@ -152,12 +144,18 @@ nav{
 }
 
 a{
+    color: var(--Text-Color);
+    font-family: Alice;
+    text-align: center;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     text-decoration: none;
-    color: var(--Text);
 }
 
 a:visited{
-    color: var(--Text);
+    color: var(--Text-Color);
 }
 
 li a:hover{
