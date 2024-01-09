@@ -11,8 +11,8 @@
     gap: 14rem;
 }
 
-.about-main{
-    padding: 1.5rem 10rem 5rem 10rem;
+.content-page-main{
+    padding: 1.5rem 10rem 7.5rem 10rem;
     display: flex;
     flex-direction: column;
     gap: 4.5rem;
@@ -23,7 +23,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 1.5625rem;
+    gap: 1.5rem;
     align-self: stretch;
     max-width: 125ch;
 }
@@ -160,4 +160,9 @@ a:visited{
 
 li a:hover{
     text-decoration: underline;
+}
+
+img{
+    object-fit: contain;
+    max-height: 35rem;
 }
