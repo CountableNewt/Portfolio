@@ -1,3 +1,5 @@
+#!usr/bin/env node
+
 // Build the express server
 const express = require('express');
 const path = require('path');
