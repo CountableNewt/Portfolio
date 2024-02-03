@@ -13,12 +13,11 @@ const librariesPath = path.join(__dirname, '../libraries');
 const scriptsPath = path.join(__dirname, '../scripts');
 const stylesPath = path.join(__dirname, '../styles');
 const viewsPath = path.join(__dirname, '../views');
-const PORT = 443;
-const PORTDEV = 3000;
 
 // Load environment variables
 require('dotenv').config();
 const environment = process.env.NODE_ENV || 'development';
+const PORT = process.env.PORT;
 
 // SSL Credentials
 const credentials = {
@@ -101,9 +100,9 @@ app.use((req, res) => {
 });
 
 // Start listening on PORT/PORTDEV, starting the server
-httpsServer.listen(environment === 'production' ? PORT : PORTDEV, (error) => {
+httpsServer.listen(PORT, (error) => {
     if (!error)
-        console.log(`Server is running on port ${environment === 'production' ? PORT : PORTDEV}`);
+        console.log(`Server is running on port ${PORT}`);
     else
         console.log("Error occurred, server can\'t start", error);
 });
