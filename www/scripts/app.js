@@ -1,8 +1,8 @@
-#!usr/bin/env node
-
 // Build the express server
 const express = require('express');
+const https = require('https');
 const path = require('path');
+const fs = require('fs');
 const app = express();
 
 // Define directory paths
@@ -15,7 +15,24 @@ const stylesPath = path.join(__dirname, '../styles');
 const viewsPath = path.join(__dirname, '../views');
 const PORT = 80;
 const PORT2 = 8080;
-const PORT3 = 443;
+const PORTS = 443;
+
+// SSL Certificate
+// Local development
+const privateKey = fs.readFileSync(path.join(rootPath,'privkey.pem'), 'utf8');
+const certificate = fs.readFileSync(path.join(rootPath, 'cert.pem'), 'utf8');
+
+// Production
+// const privateKey = fs.readFileSync('/etc/letsencrypt/live/samuel.theclementes.com/privkey.pem', 'utf8');
+// const certificate = fs.readFileSync('/etc/letsencrypt/live/samuel.theclementes.com/cert.pem', 'utf8');
+
+const credentials = {
+    key: privateKey,
+    cert: certificate
+};
+
+// Create HTTPS server
+const httpsServer = https.createServer(credentials, app);
 
 // Routes for directories
 app.use('/assets', express.static(assetsPath));
@@ -77,6 +94,10 @@ app.use((req, res) => {
     });
 });
 
+app.use(express.static(rootPath, {
+    dotfiles: 'allow' // set this to 'allow' to serve hidden directories
+}));
+
 // Start listening on PORTx, starting the server
 app.listen(PORT, (error) => {
     if (!error)
@@ -94,9 +115,9 @@ app.listen(PORT2, (error) => {
     }
 );
 
-app.listen(PORT3, (error) => {
+httpsServer.listen(PORTS, (error) => {
     if (!error)
-        console.log("Server is running on port " + PORT3);
+        console.log("Server is running on port " + PORTS);
     else
         console.log("Error occurred, server can\'t start", error);
     }
