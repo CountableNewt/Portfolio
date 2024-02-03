@@ -14,6 +14,8 @@ const scriptsPath = path.join(__dirname, '../scripts');
 const stylesPath = path.join(__dirname, '../styles');
 const viewsPath = path.join(__dirname, '../views');
 const PORT = 80;
+const PORT2 = 8080;
+const PORT3 = 443;
 
 // Routes for directories
 app.use('/assets', express.static(assetsPath));
@@ -75,10 +77,26 @@ app.use((req, res) => {
     });
 });
 
-// Start listening on PORT, starting the server
+// Start listening on PORTx, starting the server
 app.listen(PORT, (error) => {
     if (!error)
         console.log("Server is running on port " + PORT);
+    else
+        console.log("Error occurred, server can\'t start", error);
+    }
+);
+
+app.listen(PORT2, (error) => {
+    if (!error)
+        console.log("Server is running on port " + PORT2);
+    else
+        console.log("Error occurred, server can\'t start", error);
+    }
+);
+
+app.listen(PORT3, (error) => {
+    if (!error)
+        console.log("Server is running on port " + PORT3);
     else
         console.log("Error occurred, server can\'t start", error);
     }
