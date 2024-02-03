@@ -107,10 +107,3 @@ httpsServer.listen(environment === 'production' ? PORT : PORTDEV, (error) => {
     else
         console.log("Error occurred, server can\'t start", error);
 });
-
-/*httpsServer.listen(PORTSEC, (error) => {
-    if (!error && environment === 'production')
-        console.log("Server is running on port " + PORTSEC);
-    else if (error)
-        console.log("Error occurred, server can\'t start", error);
-});*/
