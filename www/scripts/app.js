@@ -1,4 +1,4 @@
-// Build the express server
+// This is the main server file
 const express = require('express');
 const https = require('https');
 const path = require('path');
@@ -13,26 +13,31 @@ const librariesPath = path.join(__dirname, '../libraries');
 const scriptsPath = path.join(__dirname, '../scripts');
 const stylesPath = path.join(__dirname, '../styles');
 const viewsPath = path.join(__dirname, '../views');
-const PORT = 80;
-const PORT2 = 8080;
-const PORTS = 443;
+const PORT = 443;
+const PORTDEV = 3000;
 
-// SSL Certificate
-// Local development
-const privateKey = fs.readFileSync(path.join(rootPath,'privkey.pem'), 'utf8');
-const certificate = fs.readFileSync(path.join(rootPath, 'cert.pem'), 'utf8');
+// Load environment variables
+require('dotenv').config();
+const environment = process.env.NODE_ENV || 'development';
 
-// Production
-// const privateKey = fs.readFileSync('/etc/letsencrypt/live/samuel.theclementes.com/privkey.pem', 'utf8');
-// const certificate = fs.readFileSync('/etc/letsencrypt/live/samuel.theclementes.com/fullchain.pem', 'utf8');
-
+// SSL Credentials
 const credentials = {
-    key: privateKey,
-    cert: certificate
+    key: fs.readFileSync(environment === 'production' ? process.env.SSL_PRIVATE_KEY_PATH_PROD : process.env.SSL_PRIVATE_KEY_PATH_DEV, 'utf8'),
+    cert: fs.readFileSync(environment === 'production' ? process.env.SSL_CERTIFICATE_PATH_PROD : process.env.SSL_CERTIFICATE_PATH_DEV, 'utf8')
 };
 
 // Create HTTPS server
 const httpsServer = https.createServer(credentials, app);
+
+// Middleware
+// Redirect HTTP to HTTPS
+app.use((req, res, next) => {
+    if(req.protocol === 'http') {
+        res.redirect(301, `https://${req.headers.host}${req.url}`);
+    } else {
+        next();
+    }
+});
 
 // Routes for directories
 app.use('/assets', express.static(assetsPath));
@@ -41,6 +46,7 @@ app.use('/libraries', express.static(librariesPath));
 app.use('/scripts', express.static(scriptsPath));
 app.use('/styles', express.static(stylesPath));
 
+// Routes for pages
 // This will serve pages from any directory in views
 app.get('/:directory/:page', (req, res) => {
     const { directory, page } = req.params;
@@ -83,7 +89,7 @@ app.get('/', (req, res) => {
             });
         }
     });
-})
+});
 
 // If there are unmatched routes this will handle them
 app.use((req, res) => {
@@ -94,31 +100,17 @@ app.use((req, res) => {
     });
 });
 
-app.use(express.static(rootPath, {
-    dotfiles: 'allow' // set this to 'allow' to serve hidden directories
-}));
-
-// Start listening on PORTx, starting the server
-app.listen(PORT, (error) => {
+// Start listening on PORT/PORTDEV, starting the server
+httpsServer.listen(environment === 'production' ? PORT : PORTDEV, (error) => {
     if (!error)
-        console.log("Server is running on port " + PORT);
+        console.log(`Server is running on port ${environment === 'production' ? PORT : PORTDEV}`);
     else
         console.log("Error occurred, server can\'t start", error);
-    }
-);
+});
 
-app.listen(PORT2, (error) => {
-    if (!error)
-        console.log("Server is running on port " + PORT2);
-    else
+/*httpsServer.listen(PORTSEC, (error) => {
+    if (!error && environment === 'production')
+        console.log("Server is running on port " + PORTSEC);
+    else if (error)
         console.log("Error occurred, server can\'t start", error);
-    }
-);
-
-httpsServer.listen(PORTS, (error) => {
-    if (!error)
-        console.log("Server is running on port " + PORTS);
-    else
-        console.log("Error occurred, server can\'t start", error);
-    }
-);
+});*/
