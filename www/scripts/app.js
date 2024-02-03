@@ -24,7 +24,7 @@ const certificate = fs.readFileSync(path.join(rootPath, 'cert.pem'), 'utf8');
 
 // Production
 // const privateKey = fs.readFileSync('/etc/letsencrypt/live/samuel.theclementes.com/privkey.pem', 'utf8');
-// const certificate = fs.readFileSync('/etc/letsencrypt/live/samuel.theclementes.com/cert.pem', 'utf8');
+// const certificate = fs.readFileSync('/etc/letsencrypt/live/samuel.theclementes.com/fullchain.pem', 'utf8'););
 
 const credentials = {
     key: privateKey,
