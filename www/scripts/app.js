@@ -17,7 +17,7 @@ const viewsPath = path.join(__dirname, '../views');
 // Load environment variables
 require('dotenv').config();
 const environment = process.env.NODE_ENV || 'development';
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // SSL Credentials
 const credentials = {
@@ -99,7 +99,7 @@ app.use((req, res) => {
     });
 });
 
-// Start listening on PORT/PORTDEV, starting the server
+// Start listening on PORT, starting the server
 httpsServer.listen(PORT, (error) => {
     if (!error)
         console.log(`Server is running on port ${PORT}`);
