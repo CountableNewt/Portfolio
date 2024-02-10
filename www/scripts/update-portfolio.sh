@@ -1,4 +1,5 @@
 #!/bin/bash
 
+sudo su
 cd ~/Portfolio
-sudo git pull
+git pull
