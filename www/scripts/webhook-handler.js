@@ -1,27 +1,14 @@
 const express = require('express');
 const crypto = require('crypto');
 const exec = require('child_process').exec;
-const fs = require('fs');
-const path = require('path');
-const morgan = require('morgan');
-require('dotenv').config({ path: 'www/.env' });
+require('dotenv').config();
 
 const app = express();
 const port = process.env.WEBHOOK_PORT || 3001;
 const secret = process.env.GITHUB_SECRET;
 
-// Create a write stream (in append mode) for the access log and error log
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-fs.open('error.log', 'a', (err, fd) => {
-    if (err) throw err;
-    fs.close(fd, (err) => {
-        if (err) throw err;
-    });
-});
-
 // Middleware
 app.use(express.json());
-app.use(morgan('combined', { stream: accessLogStream }));
 
 // Routes
 app.post('/webhook', (req, res) => {
@@ -42,10 +29,8 @@ app.post('/webhook', (req, res) => {
     // Execute the shell script
     exec("update-portfolio.sh", (err, stdout, stderr) => {
         if (err) {
-            fs.appendFile('error.log', `${new Date().toISOString()} - ${err.message}\n`, function (err) {
-                if (err) console.error('Error writing to error.log:', err);
-            });
-            return res.status(500).json({ message: 'Internal Server Error', error: err.message });
+            console.error(err);
+            return res.status(500).json({ details: 'Internal Server Error', error: err.message, payload: { received_payload: req.body }});
         }
         console.log(stdout);
         console.error(stderr);
