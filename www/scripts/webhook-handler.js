@@ -34,6 +34,7 @@ app.post('/webhook', (req, res) => {
     // Execute the shell script
     exec('git pull', (err, stdout, stderr) => {
         if (err) {
+            console.log('Error occurred while updating the repository', err.message);
             console.error(err);
             return res.status(500).json({ details: 'Internal Server Error', error: err.message, payload: req.body });
         }
