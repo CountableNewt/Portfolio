@@ -1,7 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const exec = require('child_process').exec;
-require('dotenv').config();
+require('dotenv').config({ path: 'www/.env' });
 
 const app = express();
 const port = process.env.WEBHOOK_PORT || 3001;
