@@ -27,7 +27,7 @@ app.post('/webhook', (req, res) => {
     exec("cd ~/Portfolio\\git pull", (err, stdout, stderr) => {
         if (err) {
             console.error(err);
-            return res.status(500).send(err.message);
+            return res.status(500).json({ message: 'Internal Server Error', error: err.message });
         }
         console.log(stdout);
         console.error(stderr);
