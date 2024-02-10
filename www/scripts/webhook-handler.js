@@ -27,7 +27,7 @@ app.post('/webhook', (req, res) => {
     }
 
     // Execute the shell script
-    exec("./update-portfolio.sh", (err, stdout, stderr) => {
+    exec("sudo ./update-portfolio.sh", (err, stdout, stderr) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ details: 'Internal Server Error', error: err.message, payload: req.body });
