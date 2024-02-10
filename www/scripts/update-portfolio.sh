@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd ~/Portfolio
+echo "inside update-portfolio.sh"
 git pull
