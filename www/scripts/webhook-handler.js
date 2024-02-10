@@ -1,13 +1,19 @@
 const express = require('express');
 const crypto = require('crypto');
 const exec = require('child_process').exec;
+const fs = require('fs');
+const path = require('path');
+const morgan = require('morgan');
 require('dotenv').config({ path: 'www/.env' });
 
 const app = express();
 const port = process.env.WEBHOOK_PORT || 3001;
 const secret = process.env.GITHUB_SECRET;
 
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+
 app.use(express.json());
+app.use(morgan('combined', { stream: accessLogStream }));
 
 app.post('/webhook', (req, res) => {
     const payload = JSON.stringify(req.body);
