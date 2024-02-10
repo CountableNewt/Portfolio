@@ -20,6 +20,8 @@ app.post('/webhook', (req, res) => {
         return res.status(400).send('Payload required');
     }
 
+    console.log('Payload received');
+
     // Validate the signature
     const sig = req.get('X-Hub-Signature') || '';
     const hmac = crypto.createHmac('sha1', secret);
@@ -31,8 +33,11 @@ app.post('/webhook', (req, res) => {
         return res.status(400).send('Invalid signature');
     }
 
+    console.log('Valid signature');
+
     // Execute the shell script
     exec('git pull', (err, stdout, stderr) => {
+        console.log('Updating the repository');
         if (err) {
             console.log('Error occurred while updating the repository', err.message);
             console.error(err);
