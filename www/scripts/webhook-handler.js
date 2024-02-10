@@ -24,7 +24,7 @@ app.post('/webhook', (req, res) => {
         return res.status(400).send('Invalid signature');
     }
 
-    exec('git pull', (err, stdout, stderr) => {
+    exec("git pull", (err, stdout, stderr) => {
         if (err) {
             console.error(err);
             return res.status(500).send(err.message);
