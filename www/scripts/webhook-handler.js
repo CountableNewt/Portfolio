@@ -30,7 +30,7 @@ app.post('/webhook', (req, res) => {
     exec("update-portfolio.sh", (err, stdout, stderr) => {
         if (err) {
             console.error(err);
-            return res.status(500).json({ details: 'Internal Server Error', error: err.message, payload: { received_payload: req.body }});
+            return res.status(500).json({ details: 'Internal Server Error', error: err.message, payload: req.body });
         }
         console.log(stdout);
         console.error(stderr);
