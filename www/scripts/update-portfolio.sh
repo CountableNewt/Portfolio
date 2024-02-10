@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /Portfolio/www
+cd ~/Portfolio/www
 git pull
