@@ -10,11 +10,20 @@ const app = express();
 const port = process.env.WEBHOOK_PORT || 3001;
 const secret = process.env.GITHUB_SECRET;
 
+// Create a write stream (in append mode) for the access log and error log
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+fs.open('error.log', 'a', (err, fd) => {
+    if (err) throw err;
+    fs.close(fd, (err) => {
+        if (err) throw err;
+    });
+});
 
+// Middleware
 app.use(express.json());
 app.use(morgan('combined', { stream: accessLogStream }));
 
+// Routes
 app.post('/webhook', (req, res) => {
     const payload = JSON.stringify(req.body);
     if(!payload) {
@@ -30,9 +39,12 @@ app.post('/webhook', (req, res) => {
         return res.status(400).send('Invalid signature');
     }
 
-    exec("cd ~/Portfolio\\git pull", (err, stdout, stderr) => {
+    // Execute the shell script
+    exec("update-portfolio.sh", (err, stdout, stderr) => {
         if (err) {
-            console.error(err);
+            fs.appendFile('error.log', `${new Date().toISOString()} - ${err.message}\n`, function (err) {
+                if (err) console.error('Error writing to error.log:', err);
+            });
             return res.status(500).json({ message: 'Internal Server Error', error: err.message });
         }
         console.log(stdout);
