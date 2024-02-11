@@ -24,9 +24,38 @@ app.post('/webhook', (req, res) => {
 
     // Validate the signature
     const sig = req.get('X-Hub-Signature') || '';
-    const hmac = crypto.createHmac('sha1', secret);
-    const digest = Buffer.from('sha1=' + hmac.update(payload).digest('hex'), 'utf8');
-    const checksum = Buffer.from(sig, 'utf8');
+    let hmac;
+    try {
+        hmac = crypto.createHmac('sha1', secret);
+    } catch (err) {
+        console.error('Error creating HMAC:', err);
+        return res.status(500).send('Error creating HMAC');
+    }
+    
+    let digest;
+    try {
+        digest = Buffer.from('sha1=' + hmac.update(payload).digest('hex'), 'utf8');
+    } catch (err) {
+        console.error('Error creating digest:', err);
+        return res.status(500).send('Error creating digest');
+    }
+    
+    let checksum;
+    try {
+        checksum = Buffer.from(sig, 'utf8');
+    } catch (err) {
+        console.error('Error creating checksum:', err);
+        return res.status(500).send('Error creating checksum');
+    }
+    
+    try {
+        if (checksum.length !== digest.length || !crypto.timingSafeEqual(digest, checksum)) {
+            return res.status(400).send('Invalid signature');
+        }
+    } catch (err) {
+        console.error('Error comparing checksum and digest:', err);
+        return res.status(500).send('Error comparing checksum and digest');
+    }
 
     // Compare the two buffers in constant time
     if (checksum.length !== digest.length || !crypto.timingSafeEqual(digest, checksum)) {
