@@ -35,6 +35,11 @@ app.post('/webhook', (req, res) => {
 
     console.log('Valid signature');
 
+    // Check if the event is a ping
+    if (req.get('X-GitHub-Event') === 'ping') {
+        return res.status(200).send('Ping received successfully');
+    }
+
     // Execute the shell script
     exec('cd ~/Portfolio && /usr/bin/git pull', (err, stdout, stderr) => {
         console.log('Updating the repository');
