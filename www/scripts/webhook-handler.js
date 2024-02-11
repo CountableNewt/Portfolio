@@ -2,15 +2,27 @@
 const express = require('express');
 const crypto = require('crypto');
 const exec = require('child_process').exec;
+const https = require('https');
+const fs = require('fs');
 require('dotenv').config();
 
 // Create the server
 const app = express();
 const port = process.env.WEBHOOK_PORT || 3001;
 const secret = process.env.GITHUB_SECRET;
+const environment = process.env.NODE_ENV || 'development';
+
+// SSL Credentials
+const credentials = {
+    key: fs.readFileSync(environment === 'production' ? process.env.SSL_PRIVATE_KEY_PATH_PROD : process.env.SSL_PRIVATE_KEY_PATH_DEV, 'utf8'),
+    cert: fs.readFileSync(environment === 'production' ? process.env.SSL_CERTIFICATE_PATH_PROD : process.env.SSL_CERTIFICATE_PATH_DEV, 'utf8')
+};
+
+// Create HTTPS server
+const httpsServer = https.createServer(credentials, app);
 
 // Middleware
-/*app.use(express.json());
+app.use(express.json());
 
 // Routes
 app.post('/webhook', (req, res) => {
@@ -81,13 +93,9 @@ app.post('/webhook', (req, res) => {
         console.error(stderr);
         res.status(200).send('Updated successfully');
     });
-});*/
-
-app.post('/webhook', express.json({type: 'application/json'}), (req, res) => {
-    response.status(202).send('Accepted');
 });
 
 // Start the server
-app.listen(port, () => {
+httpsServer.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
