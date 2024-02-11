@@ -10,7 +10,7 @@ const port = process.env.WEBHOOK_PORT || 3001;
 const secret = process.env.GITHUB_SECRET;
 
 // Middleware
-app.use(express.json());
+/*app.use(express.json());
 
 // Routes
 app.post('/webhook', (req, res) => {
@@ -81,6 +81,10 @@ app.post('/webhook', (req, res) => {
         console.error(stderr);
         res.status(200).send('Updated successfully');
     });
+});*/
+
+app.post('/webhook', express.json({type: 'application/json'}), (req, res) => {
+    response.status(202).send('Accepted');
 });
 
 // Start the server
