@@ -74,8 +74,8 @@ app.post('/webhook', (req, res) => {
         console.log('Updating the repository');
         if (err) {
             console.log('Error occurred while updating the repository', err.message);
-            console.error(err);
-            return res.status(500).json({ details: 'Internal Server Error', error: err.message, payload: req.body });
+            console.error('Error executing git pull:', err);
+            return res.status(500).send('Error occurred while updating the repository');
         }
         console.log(stdout);
         console.error(stderr);
