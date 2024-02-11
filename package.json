@@ -9,6 +9,8 @@
   "author": "Sam Clemente",
   "license": "ISC",
   "dependencies": {
+    "child_process": "^1.0.2",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.1",
     "express": "^4.18.2"
   }
