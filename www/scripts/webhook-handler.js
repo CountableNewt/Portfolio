@@ -36,7 +36,7 @@ app.post('/webhook', (req, res) => {
     console.log('Valid signature');
 
     // Execute the shell script
-    exec('git pull', (err, stdout, stderr) => {
+    exec('cd ~/Portfolio && /usr/bin/git pull', (err, stdout, stderr) => {
         console.log('Updating the repository');
         if (err) {
             console.log('Error occurred while updating the repository', err.message);
