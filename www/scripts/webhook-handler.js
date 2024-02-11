@@ -97,5 +97,5 @@ app.post('/webhook', (req, res) => {
 
 // Start the server
 httpsServer.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`HTTPS Server is running on port ${port}`);
 });
