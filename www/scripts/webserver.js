@@ -1,9 +1,10 @@
 // This is the main server file
-const express = require('express');
-const https = require('https');
-const path = require('path');
-const fs = require('fs');
-const app = express();
+const express = require('express'); // Creates the webserver
+const https = require('https'); // For handling https requests
+const path = require('path'); // For creating file paths
+const fs = require('fs'); // For interacting with the file system 
+const morgan = require('morgan'); // For logging
+const app = express(); // Assigns express to app
 
 // Define directory paths
 const rootPath = path.join(__dirname, '../');
@@ -29,6 +30,11 @@ const credentials = {
 const httpsServer = https.createServer(credentials, app);
 
 // Middleware
+// Logging (Only active in dev environment currently)
+if(environment === 'development') {
+    app.use(morgan('dev'));
+}
+
 // Redirect HTTP to HTTPS
 app.use((req, res, next) => {
     if(req.protocol === 'http') {
