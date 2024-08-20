@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sam Clemente - Find Me</title>
+        <link rel="stylesheet" href="styles/style.css" />
+        <script src="libraries/jquery.js"></script>
+        <script src="scripts/include-page.js"></script>
+        <script src="scripts/copy-to-clipboard.js"></script>
+    </head>
+
+    <body>
+        <main class="content-page-main">
+            <div include-page="nav"></div>
+            <h1>Find Me</h1>
+            <div class="side-by-side">
+                <section>
+                    <h3>Documents</h3>
+                    <a href="../assets/resume-current.pdf">Current Resumé</a>
+                </section>
+                <section>
+                    <h3>Email</h3>
+                    <a href="#" onclick="copyToClipboard('sam@theclementes.com')">Copy Address</a>
+                    <a href="mailto: sam@theclementes.com">Open in Mail</a>
+                </section>
+                <section>
+                    <h3>Other Sites</h3>
+                    <a href="https://getroutines.app">Routines Website</a>
+                    <a href="https://blog.allthingstech.social">AllThingsTech Blog</a>
+                </section>
+                <section>
+                    <h3>Social Media</h3>
+                    <div class="side-by-side">
+                        <a href="https://www.threads.net/@countablenewt">
+                            <div class="social-icon">
+                                <img src="../assets/icons/Threads_light.svg" alt="Threads Logo" class="threads-image"/>
+                                <!-- <p> Threads </p> -->
+                            </div>
+                        </a>
+                        <a href="https://allthingstech.social/@CountableNewt">
+                            <div class="social-icon">
+                                <image src="../assets/icons/mastodon.svg" alt="Mastodon Logo"/>
+                                <!-- <p> Mastodon </p> -->
+                            </div>
+                        </a>
+                        <a href="https://github.com/CountableNewt">
+                            <div class="social-icon">
+                                <img src="../assets/icons/Github_light.svg" alt="GitHub Logo" class="github-image"/>
+                                <!-- <p> GitHub </p> -->
+                            </div>
+                        </a>
+                        <a href="https://www.linkedin.com/in/sam-clemente/">
+                            <div class="social-icon">
+                                <img src="../assets/icons/linkedin.svg" alt="LinkedIn Logo"/>
+                                <!-- <p> LinkedIn </p> -->
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </body>
+</html>

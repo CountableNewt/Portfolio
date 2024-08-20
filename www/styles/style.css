@@ -1,16 +1,16 @@
-:root{
+:root {
     /* Colors */
-    --text-color: rgba(41,41,41,0.95);
+    --text-color: rgba(41, 41, 41, 0.95);
     --background-color: #fff1cd;
     --text-shadow: rgb(0, 0, 0, 0.8);
-
 
     /* Padding */
     --side-padding: 10rem;
     --top-padding: 1.5rem;
     --bottom-padding: 7.5rem;
     --landing-page-main-padding: var(--top-padding) var(--side-padding);
-    --content-page-main-padding: var(--top-padding) var(--side-padding) var(--bottom-padding) var(--side-padding);
+    --content-page-main-padding: var(--top-padding) var(--side-padding)
+        var(--bottom-padding) var(--side-padding);
 
     /* Gap */
     --content-page-main-gap: 4.5rem;
@@ -20,31 +20,31 @@
     --sub-section-gap: 1rem;
 }
 
-body{
+body {
     background-color: var(--background-color);
 }
 
-section{
+section {
     display: flex;
     flex-direction: column;
     gap: var(--section-gap);
 }
 
-.landing-page-main{
+.landing-page-main {
     padding: var(--landing-page-main-padding);
     display: flex;
     flex-direction: column;
     gap: var(--landing-page-main-gap);
 }
 
-.content-page-main{
+.content-page-main {
     padding: var(--content-page-main-padding);
     display: flex;
     flex-direction: column;
     gap: var(--content-page-main-gap);
 }
 
-.hero{
+.hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,108 +53,144 @@ section{
     align-self: stretch;
 }
 
-.title{
+.title {
     display: flex;
     align-items: flex-start;
     gap: 0.625rem;
     flex: 1 0 0;
 }
 
-.sub-section{
+.sub-section {
     display: flex;
     flex-direction: column;
     gap: var(--sub-section-gap);
 }
 
-@media (prefers-color-scheme: dark){
-    :root{
+.side-by-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.side-by-side section {
+    text-align: center;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.social-icon img {
+    height: 1.5rem;
+    width: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
         --text-color: rgba(253, 255, 246, 0.95);
         --background-color: #1f1f1f;
     }
+
+    .threads-image {
+        content: url(../assets/icons/Threads_dark.svg)
+    }
+
+    .github-image {
+        content: url(../assets/icons/Github_dark.svg)
+    }
 }
 
-@media (min-width: 1441px){
-    :root{
+/* Tablets, Laptops, and Desktops of all sizes */
+@media (min-width: 1441px) {
+    :root {
         --side-padding: 20%;
     }
 }
 
-@media (min-width: 1099px) and (max-width: 1440px){
-    :root{
+@media (min-width: 1099px) and (max-width: 1440px) {
+    :root {
         --side-padding: 10rem;
     }
 }
 
-@media (min-width: 911px) and (max-width: 1098px){
-    :root{
+@media (min-width: 911px) and (max-width: 1098px) {
+    :root {
         --side-padding: 7rem;
     }
 }
 
-@media (min-width: 767px) and (max-width: 910px){
-    :root{
+@media (min-width: 767px) and (max-width: 910px) {
+    :root {
         --side-padding: 5rem;
     }
 }
 
-@media (max-width: 766px){
-    :root{
+/* Tablet and smaller */
+@media (max-width: 766px) {
+    :root {
         --top-padding: 1rem;
         --side-padding: 5vw;
         --content-page-main-gap: 3rem;
     }
+
+    .side-by-side {
+        flex-direction: column;
+        gap: 5svh;
+    }
+
+    .side-by-side section {
+        gap: 2svh;
+    }
+
+    section .side-by-side {
+        flex-direction: row;
+        width: 50%;
+        padding-left: 25%;
+    }
 }
 
+/* Anything bigger than a phone */
 @media (min-width: 486px) {
-    h1{
+    h1 {
         font-size: 4rem;
     }
-    
-    h2{
+
+    h2 {
         font-size: 2.5rem;
     }
-    
-    h3{
+
+    h3 {
         font-size: 1.75rem;
     }
-    
-    p{
+
+    p {
         font-size: 1.25rem;
     }
 
-    a::after{
-        content: '';
-        position: absolute;
-        bottom: -0.2rem;
-        left: 0;
-        width: 100%;
-        height: 0.2rem;
-        box-shadow: 0 0.2rem 0.6rem var(--text-shadow);
-        transform: scaleX(0);
-        transform-origin: bottom;
-        transition: transform 300ms ease;
-    }
-    
-    a:hover::after{
-        transform: scaleX(1);
+    a:hover, a p:hover {
+        text-decoration: underline;
     }
 
-    nav{
+    nav {
         width: 100%;
         justify-content: space-between;
         align-items: center;
         gap: 1.5rem;
     }
-    
-    nav ul{
+
+    nav ul {
         justify-content: flex-end;
         align-items: flex-start;
         gap: 1.5rem;
     }
 }
 
-@media (max-width: 485px){
-    :root{
+/* Phone and Smaller */
+@media (max-width: 485px) {
+    :root {
         --landing-page-main-gap: 15svh;
         --content-page-main-gap: 2rem;
         --section-gap: 1rem;
@@ -162,36 +198,36 @@ section{
         --hero-gap: 1rem;
     }
 
-    #desktop-only{
+    #desktop-only {
         display: none;
     }
-    
+
     .landing-page-main,
-    .content-page-main{
+    .content-page-main {
         text-align: center;
     }
 
-    h1{
+    h1 {
         font-size: 3rem;
     }
 
-    h2{
+    h2 {
         font-size: 2rem;
     }
 
-    h3{
+    h3 {
         font-size: 1.25rem;
     }
 
-    p{
+    p {
         font-size: 1rem;
     }
 
-    nav a{
+    nav a {
         padding: 1rem 0;
     }
 
-    nav{
+    nav {
         background-color: var(--background-color);
         position: fixed;
         bottom: 0;
@@ -200,25 +236,35 @@ section{
         width: auto;
         justify-content: center;
     }
-    
-    nav ul{
+
+    nav ul {
         justify-content: space-between;
         width: 100%;
     }
 
-    nav ul li{
+    nav ul li {
         flex-grow: 1;
         text-align: center;
     }
+
+    .side-by-side section {
+        text-align: center;
+    }
+
+    section .side-by-side {
+        flex-direction: row;
+        width: 70%;
+        padding-left: 15%;
+    }
 }
 
-nav{
+nav {
     display: flex;
     flex-direction: row;
     align-self: stretch;
 }
 
-nav ul{
+nav ul {
     display: flex;
     flex-direction: row;
     margin-block: 0 !important;
@@ -226,7 +272,10 @@ nav ul{
     list-style: none;
 }
 
-h1, h2, h3, p{
+h1,
+h2,
+h3,
+p {
     color: var(--text-color);
     font-family: Alice;
     font-style: normal;
@@ -237,7 +286,7 @@ h1, h2, h3, p{
     flex-wrap: wrap;
 }
 
-a{
+a {
     color: var(--text-color);
     font-family: Alice;
     text-align: center;
@@ -250,11 +299,11 @@ a{
     display: inline-block;
 }
 
-img{
+img {
     object-fit: contain;
     max-height: 35rem;
 }
 
-a:visited{
+a:visited {
     color: var(--text-color);
 }

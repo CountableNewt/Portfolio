@@ -1,5 +1,3 @@
-
-
 $(function() {
   let includes = $('[include-page]');
   $.each(includes, function() {
@@ -7,4 +5,3 @@ $(function() {
     $(this).load(file);
   });
 });
-
